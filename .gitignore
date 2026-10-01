@@ -1,0 +1,12 @@
+# IntelliJ / IDE
+.idea/
+*.iml
+out/
+build/
+
+# Compilados de Java
+*.class
+
+# Sistema operativo
+Thumbs.db
+.DS_Store

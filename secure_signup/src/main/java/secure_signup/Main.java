@@ -3,13 +3,23 @@ package secure_signup;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Main {
     private static Scanner entrada;
     public static void main(String[] args) {
-        entrada=new Scanner(System.in);
+        entrada = new Scanner(System.in);
+        int opcion = 0;
+        while (opcion != 2){
+            Menu();
+            System.out.println("Dime opcion");
+            opcion=entrada.nextInt();
+            switch(opcion){
+                case 1:
+                    signUp();
+            }
+        }
     }
-
     public static void Menu(){
         System.out.println("1-Sign Up");
         System.out.println("2-Exit");
@@ -44,10 +54,14 @@ public class Main {
                 System.out.println("The passwords must match");
                 return;
             }
+            String passwordHash=BCrypt.hashpw(new String(password), BCrypt.gensalt());
+            User usuario=new User(name,lastName,email,passwordHash);
         } finally {
             // Limpieza inmediata de AMBOS arrays en la memoria RAM
             Arrays.fill(password, '0');
             Arrays.fill(password2, '0');
         }
+
+
     }
 }
